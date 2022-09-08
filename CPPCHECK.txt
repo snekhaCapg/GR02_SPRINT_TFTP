@@ -1,0 +1,14 @@
+Client Side
+
+Checking src/client.cpp ...
+1/2 files checked 39% done
+Checking src/main.cpp ...
+2/2 files checked 100% done
+
+
+Server Side
+
+Checking src/server.cpp ...
+1/2 files checked 100% done
+Checking src/main.cpp ...
+2/2 files checked 57% done

@@ -1,0 +1,108 @@
+CLIENT::VALGRIND REPORT
+
+
+valgrind --leak-check=full --show-reachable=yes ./bin/client get 127.0.0.1 a.txt
+==563== Memcheck, a memory error detector
+==563== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==563== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==563== Command: ./bin/client get 127.0.0.1 a.txt
+==563==
+==563== error calling PR_SET_PTRACER, vgdb might block
+-------------Client connected with the pid: 563-------------
+Send 7 bytes to 127.0.0.1
+==563== Conditional jump or move depends on uninitialised value(s)
+==563==    at 0x10A6E2: User::Download_File(int, sockaddr_storage, addrinfo*, char*, char*) (client.cpp:223)
+==563==    by 0x1098E1: main (main.cpp:64)
+==563==
+==563== Conditional jump or move depends on uninitialised value(s)
+==563==    at 0x484FBDC: strcmp (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==563==    by 0x10A845: User::Download_File(int, sockaddr_storage, addrinfo*, char*, char*) (client.cpp:247)
+==563==    by 0x1098E1: main (main.cpp:64)
+==563==
+==563== Conditional jump or move depends on uninitialised value(s)
+==563==    at 0x10A848: User::Download_File(int, sockaddr_storage, addrinfo*, char*, char*) (client.cpp:247)
+==563==    by 0x1098E1: main (main.cpp:64)
+==563==
+==563== Conditional jump or move depends on uninitialised value(s)
+==563==    at 0x484ED19: strlen (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==563==    by 0x10A900: User::Download_File(int, sockaddr_storage, addrinfo*, char*, char*) (client.cpp:262)
+==563==    by 0x1098E1: main (main.cpp:64)
+==563==
+==563== Conditional jump or move depends on uninitialised value(s)
+==563==    at 0x484ED28: strlen (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==563==    by 0x10A900: User::Download_File(int, sockaddr_storage, addrinfo*, char*, char*) (client.cpp:262)
+==563==    by 0x1098E1: main (main.cpp:64)
+==563==
+==563== Conditional jump or move depends on uninitialised value(s)
+==563==    at 0x484EE72: strcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==563==    by 0x10A947: User::Download_File(int, sockaddr_storage, addrinfo*, char*, char*) (client.cpp:264)
+==563==    by 0x1098E1: main (main.cpp:64)
+==563==
+==563== Syscall param write(buf) points to uninitialised byte(s)
+==563==    at 0x4BA3A37: write (write.c:26)
+==563==    by 0x4B19F6C: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==563==    by 0x4B1BA60: new_do_write (fileops.c:448)
+==563==    by 0x4B1BA60: _IO_new_do_write (fileops.c:425)
+==563==    by 0x4B1BA60: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==563==    by 0x4B1B057: _IO_file_close_it@@GLIBC_2.2.5 (fileops.c:135)
+==563==    by 0x4B0DE0E: fclose@@GLIBC_2.2.5 (iofclose.c:53)
+==563==    by 0x10AB99: User::Download_File(int, sockaddr_storage, addrinfo*, char*, char*) (client.cpp:291)
+==563==    by 0x1098E1: main (main.cpp:64)
+==563==  Address 0x4dde350 is 0 bytes inside a block of size 4,096 alloc'd
+==563==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==563==    by 0x4B0DC23: _IO_file_doallocate (filedoalloc.c:101)
+==563==    by 0x4B1CD5F: _IO_doallocbuf (genops.c:347)
+==563==    by 0x4B1BFDF: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+==563==    by 0x4B1A754: _IO_new_file_xsputn (fileops.c:1243)
+==563==    by 0x4B1A754: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==563==    by 0x4B0F056: fwrite (iofwrite.c:39)
+==563==    by 0x10A92E: User::Download_File(int, sockaddr_storage, addrinfo*, char*, char*) (client.cpp:263)
+==563==    by 0x1098E1: main (main.cpp:64)
+==563==
+Client: received packet from ==563==
+==563== HEAP SUMMARY:
+==563==     in use at exit: 0 bytes in 0 blocks
+==563==   total heap usage: 35 allocs, 35 frees, 127,377 bytes allocated
+==563==
+==563== All heap blocks were freed -- no leaks are possible
+==563==
+==563== Use --track-origins=yes to see where uninitialised values come from
+==563== For lists of detected and suppressed errors, rerun with: -s
+==563== ERROR SUMMARY: 7 errors from 7 contexts (suppressed: 0 from 0)
+
+
+
+
+
+SERVER::VALGRIND REPORT
+
+valgrind --leak-check=full --show-reachable=yes ./bin/server
+==569== Memcheck, a memory error detector
+==569== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==569== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==569== Command: ./bin/server
+==569==
+==569== error calling PR_SET_PTRACER, vgdb might block
+---------Server connected with the pid: 569------------
+--------CONNECTED WITH SERVER-------------
+--------Getting data from client----------
+SERVER: got packet from 127.0.0.1
+SERVER: packet is 7 bytes long
+SERVER: Data packet contains 01a.txt
+SERVER: sent 42 bytes
+SERVER: got packet from 127.0.0.1
+SERVER: packet is 4 bytes long
+SERVER: packet contains 0430
+^C
+---------END OF SERVER SIDE--------
+EXIT
+==569==
+==569== HEAP SUMMARY:
+==569==     in use at exit: 0 bytes in 0 blocks
+==569==   total heap usage: 33 allocs, 33 frees, 115,960 bytes allocated
+==569==
+==569== All heap blocks were freed -- no leaks are possible
+==569==
+==569== For lists of detected and suppressed errors, rerun with: -s
+==569== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[1]+  Killed                  ./bin/server
